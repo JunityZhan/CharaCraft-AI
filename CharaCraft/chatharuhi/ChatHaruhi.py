@@ -60,8 +60,7 @@ class ChatHaruhi:
             self.embedding = luotuo_openai_embedding
 
         if role_name != '':
-            story_text_folder = f'text/{role_name}'
-            db_folder = f'chromadb/{role_name}'
+            db_folder = story_text_folder.replace('text', 'chromadb')
 
             if self.verbose:
                 print(f'loading pre-defined character {role_name}...')

@@ -7,7 +7,6 @@ from selenium import webdriver
 from scrapy.spiders import Spider
 from scrapy.crawler import Crawler
 
-
 def process_exception(request: Request, exception: Exception, spider: Spider) -> Optional[Response]:
     return None
 
@@ -18,11 +17,9 @@ def process_response(request: Request, response: Response, spider: Spider) -> Re
 
 class RandomHeaderMiddleWare:
     def __init__(self) -> None:
-        self.user_agents = ('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
-                            'Chrome/118.0.0.0 Safari/537.36')
+        pass
 
     def process_request(self, request: Request, spider: Spider) -> HtmlResponse:
-        request.headers['User-Agent'] = self.user_agents
         option = webdriver.ChromeOptions()
         option.add_argument('--headless')
         option.add_argument('--disable-gpu')

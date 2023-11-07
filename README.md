@@ -33,7 +33,7 @@ cd CharaCraft
 Taking the Chinese data from the game "Genshin Impact" as an example, with the data sourced from [Demon God Quest](https://wiki.biligame.com/ys/魔神任务), execute the following command to crawl the data:
 
 ```bash
-python spider/run_spider.py --urls https://wiki.biligame.com/ys/魔神任务  --depths 1
+python spider/run.py --urls https://wiki.biligame.com/ys/魔神任务  --depths 1
 ```
 
 The crawled data will be saved in JSONL format and stored in the `/CharaCraft/data` directory.
@@ -43,7 +43,7 @@ The crawled data will be saved in JSONL format and stored in the `/CharaCraft/da
 Extract the dialogue data for a specific character (e.g., Paimon):
 
 ```bash
-python extract/extract.py --name 派蒙 --dialogues
+python extract/dialogues.py --name 派蒙 --dialogues
 ```
 
 The extracted text will be saved in the `/CharaCraft/text` directory.
@@ -53,7 +53,7 @@ The extracted text will be saved in the `/CharaCraft/text` directory.
 Start a chat session with Paimon, interacting as the Traveler:
 
 ```bash
-python animate/animate.py --role_name 派蒙 --name 旅行者
+python animate/webui.py --role_name 派蒙 --name 旅行者
 ```
 
 After starting, visit `localhost:7860` to chat with Paimon.

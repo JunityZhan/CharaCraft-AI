@@ -1,11 +1,11 @@
 from typing import Optional, Generator, Any, Union, Dict
 from urllib.parse import urlparse
+import urllib
 import scrapy
 from scrapy import Spider
 from scrapy.http import Response, Request
 from scrapy.crawler import Crawler
 from ..items import SpiderItem
-
 
 class TextSpider(Spider):
     name: str = 'text'
@@ -28,14 +28,20 @@ class TextSpider(Spider):
     def parse(self, response: Response) -> Generator[Union[Dict[str, str], Request], None, None]:
         """Extract text from the page and follow links within the allowed domain."""
         # Extract text from the page, excluding content within scripts or hidden elements
-        all_text = response.xpath(
-            '(//div)/descendant-or-self::text()[not(ancestor::script) and not(ancestor-or-self::*[contains(@style, '
-            '"display: none")])]').extract()
-        all_text_str = '\n'.join(all_text).strip()
+        all_text = response.xpath("""
+        //body
+        //text()[
+          not(parent::script) and 
+          not(parent::style) and 
+          not(parent::link) and 
+          not(ancestor::head)
+        ]
+        """).extract()
+        all_text_str = ''.join(all_text).strip()
 
         # Populate and yield the item
         item = SpiderItem()
-        item['url'] = response.url
+        item['url'] = urllib.parse.unquote(response.url)
         item['text'] = all_text_str
         yield item
 
@@ -45,6 +51,6 @@ class TextSpider(Spider):
 
         if current_depth < self.limit_depth:
             for href in response.css('a::attr(href)').extract():  # TODO： 允许用户自定义规则
-                next_page = response.urljoin(href)
+                next_page = urllib.parse.unquote(response.urljoin(href))
                 if self.allowed_domains[0] in next_page:
                     yield scrapy.Request(next_page, callback=self.parse)

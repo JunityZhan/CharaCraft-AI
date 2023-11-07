@@ -9,7 +9,7 @@ def load_config(file_path: str) -> Dict[str, Any]:
         return json.load(file)
 
 
-config = load_config('./spider/spider.json')
+config = load_config('./CharaCraft/spider/spider.json')
 
 
 class GeneralPipeline:

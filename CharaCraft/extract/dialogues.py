@@ -36,19 +36,7 @@ def merge_continuous_dialogues(dialogues, colon='：'):
     # 将处理后的对话列表转换为字符串，并在每条对话之间添加换行符
     merged_dialogues_str = '\n'.join(merged_dialogues)
     return merged_dialogues_str
-def parse_arguments():
-    """Parse and return command line arguments."""
-    parser = argparse.ArgumentParser(description='Extract specific character from data.')
-    parser.add_argument('--files', nargs='+',
-                        help='File names of target character in data folder. If not provided, all files will be used.')
-    parser.add_argument('--name', type=str, required=True,
-                        help='Name of target character. You should only provide one character once.')
-    parser.add_argument('--dialogues', action='store_true', help='Whether only extract dialogues. Defaults to False.')
-    parser.add_argument('--num_context', type=int, default=2,
-                        help='Number of context lines to include before and after the target character lines. Defaults to 2.')
 
-    args = parser.parse_args()
-    return args
 
 
 def determine_colon(name):
@@ -84,20 +72,18 @@ def find_and_save_dialogues(text, name, num_context, colon, dialogues):
     return result
 
 
-def main():
-    args = parse_arguments()
-
+def main(args):
     name = args.name
     num_context = args.num_context
-    file_path = './data/'
+    file_path = './CharaCraft/data/'
     folder_name = name.replace('"', '')
-    result_folder = f'./text/{folder_name}/'
+    result_folder = f'./CharaCraft/text/{folder_name}/'
     os.makedirs(result_folder, exist_ok=True)
 
     colon = determine_colon(name)
 
     if args.files:
-        file_names = args.files
+        file_names = [f'{f}.jsonl' if not f.endswith('.jsonl') else f for f in args.files]
     else:
         file_names = [f for f in os.listdir(file_path) if f.endswith('.jsonl')]
 
@@ -112,7 +98,3 @@ def main():
                     with open(os.path.join(result_folder, f'{dialogue_counter}.txt'), 'w', encoding='utf-8') as f:
                         f.write(dialogue)
                     dialogue_counter += 1
-
-
-if __name__ == '__main__':
-    main()

@@ -32,7 +32,7 @@ cd CharaCraft
 以《原神》游戏中的中文数据为例，数据来源于[魔神任务](https://wiki.biligame.com/ys/魔神任务)，执行以下命令进行数据爬取：
 
 ```bash
-python spider/run_spider.py --urls https://wiki.biligame.com/ys/魔神任务  --depths 1
+python spider/run.py --urls https://wiki.biligame.com/ys/魔神任务  --depths 1
 ```
 
 爬取的数据将被保存为JSONL格式，存放于`/CharaCraft/data`目录下。
@@ -42,7 +42,7 @@ python spider/run_spider.py --urls https://wiki.biligame.com/ys/魔神任务  --
 提取特定角色（如：派蒙）的对话数据：
 
 ```bash
-python extract/extract.py --name 派蒙 --dialogues
+python extract/dialogues.py --name 派蒙 --dialogues
 ```
 
 提取的文本将被保存在`/CharaCraft/text`目录下。
@@ -52,7 +52,7 @@ python extract/extract.py --name 派蒙 --dialogues
 启动与派蒙的聊天会话，以旅行者的身份进行互动：
 
 ```bash
-python animate/animate.py --role_name 派蒙 --name 旅行者
+python animate/webui.py --role_name 派蒙 --name 旅行者
 ```
 
 启动后，通过访问`localhost:7860`，您可以开始与派蒙进行聊天。
