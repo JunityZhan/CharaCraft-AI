@@ -91,6 +91,7 @@ def main(args):
         file_names = [f for f in os.listdir(file_path) if f.endswith('.jsonl')]
 
     dialogue_counter = 1
+    result = ""
     for file_name in file_names:
         with jsonlines.open(os.path.join(file_path, file_name)) as reader:
             for obj in reader:
@@ -98,6 +99,7 @@ def main(args):
                 dialogues = find_and_save_dialogues(text, name, num_context, colon, args.dialogues)
                 for dialogue in dialogues:
                     dialogue = merge_continuous_dialogues(dialogue, colon=colon)
-                    with open(os.path.join(result_folder, f'{dialogue_counter}.txt'), 'w', encoding='utf-8') as f:
-                        f.write(dialogue)
+                    result += dialogue + '\n'
                     dialogue_counter += 1
+    with open(os.path.join(result_folder, f'{folder_name}.txt'), 'w', encoding='utf-8') as file:
+        file.write(result)

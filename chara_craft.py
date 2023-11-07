@@ -48,6 +48,6 @@ class CharaCraft:
             print(f"Function {args.function} is not available in module {args.module}.")
             return
 
-        function_to_call(args)
+        print(function_to_call(args))
 
         # Reset the arguments dictionary for the next operation

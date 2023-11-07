@@ -45,7 +45,7 @@ def main(args):
         file_names = [f'{f}.jsonl' if not f.endswith('.jsonl') else f for f in args.files]
     else:
         file_names = [f for f in os.listdir(file_path) if f.endswith('.jsonl')]
-
+    result = ""
     dialogue_counter = 1
     for name in keywords:
         for file_name in file_names:
@@ -54,6 +54,7 @@ def main(args):
                     text = obj['text']
                     dialogues = find_and_save_dialogues(text, name, num_context)
                     for dialogue in dialogues:
-                        with open(os.path.join(result_folder, f'{dialogue_counter}.txt'), 'w', encoding='utf-8') as f:
-                            f.write(dialogue)
+                        result += dialogue
                         dialogue_counter += 1
+    with open(os.path.join(result_folder, f'keywords.txt'), 'w', encoding='utf-8') as file:
+        file.write(result)

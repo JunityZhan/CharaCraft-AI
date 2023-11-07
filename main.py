@@ -46,7 +46,10 @@ def main():
     parser.add_argument('--prompt', type=str, default='default',
                         help='Prompt file name. Defaults to prompt.')
     # animate
-
+    # generate
+    parser.add_argument('--attributes', nargs='+', type=str,
+                        help='Attributes of target character. You should only provide one attribute once.')
+    # generate
     args = parser.parse_args()
 
     characraft = CharaCraft()
