@@ -1,8 +1,6 @@
 import argparse
-from CharaCraft.generate import prompt
-from CharaCraft.extract import dialogues, keywords
-from CharaCraft.animate import webui
-from CharaCraft.spider import run
+from CharaCraft import generate, extract, animate, spider
+from chara_craft import CharaCraft
 
 
 def main():
@@ -51,49 +49,9 @@ def main():
 
     args = parser.parse_args()
 
-    if args.module == 'generate':
-        if args.function == 'prompt':
-            if not args.name:
-                print('Name of target character is required.')
-                return
-            prompt.main(args)
-        else:
-            print("Invalid function. Choose from 'prompt'. ")
-
-    elif args.module == 'extract':
-        if args.function == 'dialogues':
-            if not args.name:
-                print('Name of target character is required.')
-                return
-            dialogues.main(args)
-        elif args.function == 'keywords':
-            if not args.name or not args.keywords:
-                print('Name of target character and keywords are required.')
-                return
-            keywords.main(args)
-        else:
-            print("Invalid function. Choose from 'dialogues', 'keywords'. ")
-
-    elif args.module == 'animate':
-        if args.function == 'webui':
-            if not args.name:
-                print('Name of target character is required.')
-                return
-            webui.main(args)
-        else:
-            print("Invalid function. Choose from 'webui'. ")
-
-    elif args.module == 'spider':
-        if args.function == 'run':
-            # examine required arguments
-            if not args.urls or not args.depths:
-                print('At least one URL and one depth are required.')
-                return
-            run.main(args)
-        else:
-            print("Invalid function. Choose from 'run'. ")
-    else:
-        print("Invalid module. Choose from 'generate', 'extract', 'animate'.")
+    characraft = CharaCraft()
+    characraft.update(**vars(args))
+    characraft.run()
 
 
 if __name__ == "__main__":

@@ -10,6 +10,9 @@ sys.path.append(parent_dir)
 
 from chatharuhi import ChatHaruhi
 def main(args):
+    if args.prompt is None or args.name is None or args.me is None or args.first_response is None:
+        print('Prompt file name, name of target character, your name and your first response are required.')
+        return
     prompt, name, me, first_response = args.prompt, args.name, args.me, args.first_response
     db_folder = os.path.join('CharaCraft\\text', name)
     prompt_path = os.path.join('CharaCraft\\prompt', prompt+'.txt')

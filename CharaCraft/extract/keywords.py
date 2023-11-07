@@ -30,6 +30,9 @@ def find_and_save_dialogues(text, name, num_context):
 
 
 def main(args):
+    if not args.name or not args.keywords:
+        print('Name of target character and keywords are required.')
+        return
     keywords = args.keywords
     name = args.name
     num_context = args.num_context

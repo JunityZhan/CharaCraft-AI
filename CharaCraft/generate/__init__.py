@@ -1,0 +1,1 @@
+from .prompt import main as prompt

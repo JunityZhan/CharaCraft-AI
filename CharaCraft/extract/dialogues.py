@@ -73,6 +73,9 @@ def find_and_save_dialogues(text, name, num_context, colon, dialogues):
 
 
 def main(args):
+    if not args.name or not args.num_context:
+        print('Name of target character and number of context lines are required.')
+        return
     name = args.name
     num_context = args.num_context
     file_path = './CharaCraft/data/'
