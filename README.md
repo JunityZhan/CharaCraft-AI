@@ -1,7 +1,7 @@
 [中文](README_zh.md)
 
 
-# DeepWisdom-Character-SOP
+# CharaCraft-AI
 
 This project aims to help users create or fine-tune their own role-playing large language models, providing a novel and interactive chat experience.
 
