@@ -1,0 +1,1 @@
+## This is a copy of [chatharuhi](https://github.com/LC1332/Chat-Haruhi-Suzumiya/) with some customizations.

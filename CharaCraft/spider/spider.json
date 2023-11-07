@@ -1,0 +1,21 @@
+{
+    "honkai-star-rail.fandom.com": {
+        "sub_keywords": {
+            "": ""
+        },
+        "rm_line_keywords": [],
+        "rm_page_keywords": [],
+        "min_line_len": 3,
+        "max_line_len": 200
+    },
+    "Character": {
+        "sub_keywords": {
+            "Honkai: Star Rail WikiWelcome to the Honkai: Star Rail Wiki!": ""
+        },
+        "rm_line_keywords": ["Come on and"],
+        "rm_page_keywords": [],
+        "min_line_len": 3,
+        "max_line_len": 200
+    }
+
+}

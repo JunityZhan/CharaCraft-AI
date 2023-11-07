@@ -37,6 +37,7 @@ pip-log.txt
 pip-delete-this-directory.txt
 
 # Unit test / coverage reports
+.idea/
 htmlcov/
 .tox/
 .nox/
@@ -50,11 +51,16 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
-
+/CharaCraft/data/*
+/CharaCraft/text/*
+/CharaCraft/prompt/*
+/CharaCraft/notebook/*
+/CharaCraft/chromadb/*
+!/CharaCraft/prompt/default.txt
 # Translations
 *.mo
 *.pot
-
+.DS_Store
 # Django stuff:
 *.log
 local_settings.py
