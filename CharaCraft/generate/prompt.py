@@ -27,8 +27,10 @@ def ask(prompt_text, client, file, content):
     while True:
         runs = client.beta.threads.runs.list(thread.id)
         latest_run = runs.data[0]
-        if latest_run.status in ["completed", "failed"]:
+        if latest_run.status in "completed":
             break
+        elif latest_run.status in "failed":
+            raise Exception("Run failed")
         time.sleep(2)
     messages = client.beta.threads.messages.list(
         thread_id=thread.id
@@ -42,8 +44,7 @@ def ask(prompt_text, client, file, content):
 def generate_prompt(name):
     return (
         f"You will generate a json that include information of {name} based on the file.\n"
-        f"The file is very large, so you should only"
-        f"retrieve the specific text to generate the json.\n"
+        f"You should retrieve the specific text to generate the json.\n"
         f"Your response should be as detailed as possible.\n"
     )
 
@@ -58,7 +59,10 @@ def main(args):
     content += "{\n"
     for attribute in attributes:
         content += f"    {attribute}: \n"
-    content += "}"
+    content += "}\n"
+    content += "Your response should be the same language as the language of the attributes above.\n"
+    content += "When you found some information is missing, make a guess from the context.\n"
+    content += "Your response should be strictly in json format.\n Starting from '{' and ending with '}'.\n"
     directory_path = os.path.join('CharaCraft\\text', name)
     file_path = os.path.join(directory_path, 'keywords.txt')
     client = Client()
