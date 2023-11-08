@@ -41,8 +41,8 @@ def main(args):
     os.makedirs(result_folder, exist_ok=True)
 
 
-    if args.files:
-        file_names = [f'{f}.jsonl' if not f.endswith('.jsonl') else f for f in args.files]
+    if args.file:
+        file_names = [f'{f}.jsonl' if not f.endswith('.jsonl') else f for f in args.file]
     else:
         file_names = [f for f in os.listdir(file_path) if f.endswith('.jsonl')]
     result = ""

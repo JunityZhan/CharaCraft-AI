@@ -1,7 +1,9 @@
 import argparse
 import subprocess
 import os
+import sys
 from urllib import parse
+
 
 
 def main(args):
@@ -16,5 +18,4 @@ def main(args):
         url = parse.unquote(url)
         print(url)
         # 使用绝对路径调用 subprocess
-        subprocess.run(['python', spider_helper_path, url, str(depth), '1' if args.dynamic else '0'])
-
+        subprocess.run([sys.executable, spider_helper_path, url, str(depth), '1' if args.dynamic else '0'])
