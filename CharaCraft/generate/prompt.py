@@ -63,7 +63,7 @@ def main(args):
     content += "Your response should be the same language as the language of the attributes above.\n"
     content += "When you found some information is missing, make a guess from the context.\n"
     content += "Your response should be strictly in json format.\n Starting from '{' and ending with '}'.\n"
-    directory_path = os.path.join('CharaCraft\\text', name)
+    directory_path = os.path.join('CharaCraft', 'text', name)
     file_path = os.path.join(directory_path, 'keywords.txt')
     client = Client()
     file = client.files.create(
