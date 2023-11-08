@@ -60,4 +60,4 @@ After starting, visit `localhost:7860` to chat with Paimon.
 
 ---
 
-By following these steps, you should have successfully started the CharaCraft-AI project and be able to interact with the characters in the system. Enjoy your experience!
+By following these steps, you should have successfully started the CharaCraft-AI project and are able to interact with the characters in the system. Enjoy your experience!
