@@ -26,7 +26,7 @@ def find_and_save_dialogues(text, name, num_context):
                     result.append('\n'.join(lines[found_lines[i - 1][0]:found_lines[i - 1][1]]))
 
         result.append('\n'.join(lines[found_lines[-1][0]:found_lines[-1][1]]))
-    return result
+    return ''.join(result).split('\n')
 
 
 def main(args):
@@ -46,7 +46,6 @@ def main(args):
     else:
         file_names = [f for f in os.listdir(file_path) if f.endswith('.jsonl')]
     result = ""
-    dialogue_counter = 1
     for name in keywords:
         for file_name in file_names:
             with jsonlines.open(os.path.join(file_path, file_name)) as reader:
@@ -54,7 +53,7 @@ def main(args):
                     text = obj['text']
                     dialogues = find_and_save_dialogues(text, name, num_context)
                     for dialogue in dialogues:
-                        result += dialogue
-                        dialogue_counter += 1
+                        if dialogue not in result:
+                            result += dialogue + '\n'
     with open(os.path.join(result_folder, f'keywords.txt'), 'w', encoding='utf-8') as file:
         file.write(result)
