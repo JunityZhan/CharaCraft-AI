@@ -1,11 +1,11 @@
 import argparse
-from CharaCraft import generate, extract, animate, spider
+from CharaCraft import generate, extract, spider
 
 class CharaCraft:
     def __init__(self):
         # Initialize a dictionary to hold the arguments for each function.
-        self.args_dict = {'me': 'traveler', 'first_response': 'Nice to meet you.', 'prompt': 'default',
-                          'dynamic': False, 'dialogue': False, 'num_context': 2}
+        self.args_dict = {'first_response': 'Nice to meet you.', 'prompt': 'default',
+                          'dynamic': False, 'dialogue': False, 'num_context': 2, 'pair': False}
         # add default values
     def update(self, **kwargs):
         self.args_dict.update(kwargs)

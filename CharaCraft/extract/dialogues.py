@@ -73,10 +73,12 @@ def find_and_save_dialogues(text, name, num_context, colon, dialogues):
 
 
 def main(args):
-    if not args.name or not args.num_context:
+    if not args.name:
         print('Name of target character and number of context lines are required.')
         return
     name = args.name
+    if args.pair:
+        me = args.me
     num_context = args.num_context
     file_path = './CharaCraft/data/'
     folder_name = name.replace('"', '')
@@ -97,8 +99,12 @@ def main(args):
                 text = obj['text']
                 dialogues = find_and_save_dialogues(text, name, num_context, colon, args.dialogues)
                 for dialogue in dialogues:
-                    dialogue = merge_continuous_dialogues(dialogue, colon=colon)
-                    if dialogue not in result:
-                        result += dialogue + '\n'
-    with open(os.path.join(result_folder, f'{folder_name}.txt'), 'w', encoding='utf-8') as file:
+                    dialogue_array = merge_continuous_dialogues(dialogue, colon=colon).split('\n')
+                    for dialogue in dialogue_array:
+                        if dialogue not in result:
+                            if args.pair:
+                                if me not in dialogue and name not in dialogue:
+                                    continue
+                            result += dialogue + '\n'
+    with open(os.path.join(result_folder, f'dialogues.txt'), 'w', encoding='utf-8') as file:
         file.write(result)

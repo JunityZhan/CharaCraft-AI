@@ -2,7 +2,7 @@
 
 # CharaCraft-AI
 
-本项目旨在帮助用户创建或微调自定义的角色扮演大语言模型，提供一种新颖且互动的聊天体验。
+本项目旨在帮助用户创建自定义的角色扮演大语言模型，提供一种新颖且互动的聊天体验。
 
 ## 快速开始指南
 
@@ -19,11 +19,8 @@ cd CharaCraft-AI
 
 ### 2. 环境准备
 
-切换到项目目录：
-
-```bash
-cd CharaCraft
-```
+1. 创建虚拟环境
+2. 安装requirements.txt
 
 ### 3. 数据处理
 
@@ -32,7 +29,9 @@ cd CharaCraft
 以《原神》游戏中的中文数据为例，数据来源于[魔神任务](https://wiki.biligame.com/ys/魔神任务)，执行以下命令进行数据爬取：
 
 ```bash
-python spider/run.py --urls https://wiki.biligame.com/ys/魔神任务  --depths 1
+python main.py spider run \
+--urls https://wiki.biligame.com/ys/魔神任务 \
+--depths 1
 ```
 
 爬取的数据将被保存为JSONL格式，存放于`/CharaCraft/data`目录下。
@@ -42,7 +41,7 @@ python spider/run.py --urls https://wiki.biligame.com/ys/魔神任务  --depths 
 提取特定角色（如：派蒙）的对话数据：
 
 ```bash
-python extract/dialogues.py --name 派蒙 --dialogues
+python main.py extract dialogues --name 派蒙 
 ```
 
 提取的文本将被保存在`/CharaCraft/text`目录下。

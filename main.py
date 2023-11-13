@@ -35,6 +35,8 @@ def main():
 
     parser.add_argument('--dialogues', action='store_true',
                         help='Whether it is a dialogue. Defaults to False.')
+    parser.add_argument('--pair', action='store_true',
+                        help='Whether to extract dialogues between two characters. Defaults to False.')
     # extract
     # animate
     parser.add_argument('--me', type=str, default='traveler',
