@@ -126,7 +126,7 @@ def ask_text_prompt(name, me):
                 "role": "user",
                 "content": f"Here, I provides two text files. One is the information and story of {name}, the other "
                            f"is the words {name} once said. You can use them to make the character card. Remember: "
-                           f"Your language should be {detect(content)}."
+                           f"Your language must be {detect(content)}."
             },
         ]
     )
@@ -243,7 +243,9 @@ def respond(message, history):
         elif latest_run.status in "failed":
             raise Exception("Run failed")
         time.sleep(2)
+    response = re.sub(r'【.*?】', '', response)
     return response
+
 
 def create_chatbot(system_prompt, character_card, context_files, first_response):
     global assistant_id, thread_id
@@ -286,11 +288,12 @@ def create_chatbot(system_prompt, character_card, context_files, first_response)
         elif latest_run.status in "failed":
             raise Exception("Run failed")
         time.sleep(2)
-    return gr.Chatbot(value=[['Hi', response]])
+    return gr.Chatbot(render=False, visible=True), gr.Textbox(render=False, visible=True, lines=2, scale=2)
 
 
 with gr.Blocks(theme='soft') as demo:
     gr.Markdown("## [CharaCraft](https://github.com/JunityZhan/CharaCraft-AI)", elem_id="title")
+    gr.Markdown("更多信息请访问https://github.com/JunityZhan/CharaCraft-AI 欢迎给项目点个star！")
     with gr.Row():
         with gr.Column():
             with gr.Row():
@@ -352,8 +355,9 @@ with gr.Blocks(theme='soft') as demo:
         first_response = gr.Textbox(label="First Response", placeholder="Enter one attribute per line", lines=3,
                                     interactive=True)
     create_button = gr.Button("Create", elem_id="create_button", variant="primary")
-    bot = gr.Chatbot(value=[['Chatbot is not loaded', 'Chatbot is not loaded']], render=False)
-    chatbot = gr.ChatInterface(fn=respond, chatbot=bot)
+    text = gr.Textbox(render=False, visible=False)
+    bot = gr.Chatbot(render=False, visible=False)
+    chatbot = gr.ChatInterface(fn=respond, chatbot=bot, textbox=text)
     crawl_button.click(fn=crawl,
                        inputs=[plot_urls, plot_depths, character_urls, character_depths, dynamic],
                        outputs=[plot_files, character_files])
@@ -363,5 +367,5 @@ with gr.Blocks(theme='soft') as demo:
                          outputs=[system_prompt, character_card, context_files])
     create_button.click(fn=create_chatbot,
                         inputs=[system_prompt, character_card, context_files, first_response],
-                        outputs=[bot])
+                        outputs=[bot, text])
 demo.launch()
