@@ -57,6 +57,10 @@ cover/
 /CharaCraft/notebook/*
 /CharaCraft/chromadb/*
 !/CharaCraft/prompt/default.txt
+!/CharaCraft/prompt/vision_prompt.txt
+!/CharaCraft/prompt/text_prompt.txt
+!/CharaCraft/prompt/system_prompt.txt
+!/CharaCraft/prompt/character_card.txt
 # Translations
 *.mo
 *.pot

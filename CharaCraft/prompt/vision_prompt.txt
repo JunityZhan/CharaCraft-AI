@@ -1,0 +1,13 @@
+Please provide a detailed description of {name} in the image, focusing only on their appearance, with each aspect in a separate line for clarity. Ensure no background details are included. Your description should be thorough, covering the following points. Your response should be in one long paragraph that compose all the features below together:
+
+Character's style (e.g., anime style).
+Hair, detailing the style and color.
+Face, including skin tone, shape, and expression.
+Facial features.
+Physique, covering height, body type, and posture.
+Arms and hands.
+Thighs, calves, and feet.
+Clothing, specifying the style, fashion, and color.
+Any unique identifiers.
+
+In your response, use {name} to identify the character.
